@@ -1,0 +1,874 @@
+{
+  "Producers": [
+    {
+      "addr": "relays-new.cardano-testnet.iohkdev.io",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Ohio"
+    },
+    {
+      "addr": "195.154.69.26",
+      "port": 3003,
+      "continent": "Europe",
+      "state": "FR"
+    },
+    {
+      "addr": "relays.cardano-testnet.uniquestaking.com",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Iowa"
+    },
+    {
+      "addr": "51.79.141.170",
+      "port": 7900,
+      "continent": "Asia",
+      "state": "SG"
+    },
+    {
+      "addr": "95.217.133.234",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "FI"
+    },
+    {
+      "addr": "178.238.224.187",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "relays.testnet.stakenuts.com",
+      "port": 3001,
+      "continent": "North America",
+      "state": "New Jersey"
+    },
+    {
+      "addr": "testnet-relays.onyxstakepool.com",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Oregon"
+    },
+    {
+      "addr": "testnet.adanorthpool.com",
+      "port": 9015,
+      "continent": "Europe",
+      "state": "NO"
+    },
+    {
+      "addr": "testicles.kiwipool.org",
+      "port": 9710,
+      "continent": "Oceania",
+      "state": "NZ"
+    },
+    {
+      "addr": "tn.adastack.net",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "NL"
+    },
+    {
+      "addr": "18.132.238.21",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "relay1-test.ahlnet.nu",
+      "port": 2101,
+      "continent": "Europe",
+      "state": "SE"
+    },
+    {
+      "addr": "relay.iohk-tn.cardano.none.guru",
+      "port": 31337,
+      "continent": "Europe",
+      "state": "FR"
+    },
+    {
+      "addr": "116.203.182.206",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "relays.cardano-testnet.chaincrucial.io",
+      "port": 13001,
+      "continent": "North America",
+      "state": "California"
+    },
+    {
+      "addr": "116.203.182.206",
+      "port": 3002,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "relay02.orkastaker.com",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "BE"
+    },
+    {
+      "addr": "194.62.6.38",
+      "port": 9080,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "relay01.orkastaker.com",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "BE"
+    },
+    {
+      "addr": "relay.testnet.cardanostakehouse.com",
+      "port": 6001,
+      "continent": "North America",
+      "state": "Oregon"
+    },
+    {
+      "addr": "161.97.82.0",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "bnty1.testnet.cryptobounty.org",
+      "port": 6165,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty2.testnet.cryptobounty.org",
+      "port": 6166,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty3.testnet.cryptobounty.org",
+      "port": 6167,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty4.testnet.cryptobounty.org",
+      "port": 6168,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty5.testnet.cryptobounty.org",
+      "port": 6169,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty6.testnet.cryptobounty.org",
+      "port": 7175,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty7.testnet.cryptobounty.org",
+      "port": 7176,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty8.testnet.cryptobounty.org",
+      "port": 7177,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "bnty0.testnet.cryptobounty.org",
+      "port": 7179,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "testnet.crypto2099.io",
+      "port": 3001,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "116.203.233.9",
+      "port": 3002,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "139.218.11.14",
+      "port": 6005,
+      "continent": "Oceania",
+      "state": "AU"
+    },
+    {
+      "addr": "relay0-ctn.adanet.io",
+      "port": 4001,
+      "continent": "North America",
+      "state": "District of Columbia"
+    },
+    {
+      "addr": "116.203.38.64",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "116.203.38.64",
+      "port": 3003,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "adapool.crazycareergames.com",
+      "port": 7001,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "adapool.crazycareergames.com",
+      "port": 7002,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "adapool.crazycareergames.com",
+      "port": 7003,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "adapool.crazycareergames.com",
+      "port": 7004,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "adapool.crazycareergames.com",
+      "port": 7005,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "relay.cardano-dev.securestaking.io",
+      "port": 3000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "157.245.131.60",
+      "port": 6000,
+      "continent": "North America",
+      "state": "New Jersey"
+    },
+    {
+      "addr": "testnet.growpools.io",
+      "port": 4189,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "146.166.116.164",
+      "port": 6164,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "89.191.99.186",
+      "port": 6001,
+      "continent": "Europe",
+      "state": "LV"
+    },
+    {
+      "addr": "146.166.116.163",
+      "port": 6163,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "146.166.116.172",
+      "port": 7172,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "146.166.116.171",
+      "port": 7171,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "146.166.116.174",
+      "port": 7174,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "54.241.77.32",
+      "port": 3001,
+      "continent": "North America",
+      "state": "California"
+    },
+    {
+      "addr": "146.166.116.173",
+      "port": 7173,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "146.166.116.170",
+      "port": 7170,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "146.166.116.160",
+      "port": 6160,
+      "continent": "North America",
+      "state": "Wyoming"
+    },
+    {
+      "addr": "209.126.3.185",
+      "port": 7031,
+      "continent": "North America",
+      "state": "Missouri"
+    },
+    {
+      "addr": "cardano-tn-relay.failfection.com",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Ohio"
+    },
+    {
+      "addr": "95.216.178.106",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "FI"
+    },
+    {
+      "addr": "104.198.217.123",
+      "port": 3010,
+      "continent": "North America",
+      "state": "Iowa"
+    },
+    {
+      "addr": "aa.eu.relays.testnet.godano.dev",
+      "port": 3333,
+      "continent": "Europe",
+      "state": "FI"
+    },
+    {
+      "addr": "bb.eu.relays.testnet.godano.dev",
+      "port": 3333,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "relay1.nordicpool.org",
+      "port": 7055,
+      "continent": "Europe",
+      "state": "SE"
+    },
+    {
+      "addr": "relay1.osterlindh.com",
+      "port": 7067,
+      "continent": "Europe",
+      "state": "SE"
+    },
+    {
+      "addr": "relay1.osterlindh.com",
+      "port": 7061,
+      "continent": "Europe",
+      "state": "SE"
+    },
+    {
+      "addr": "95.179.169.157",
+      "port": 6600,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "testnet-relays.adavibe.eu",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "FI"
+    },
+    {
+      "addr": "157.90.31.212",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "dev-node1.adastaking.ch",
+      "port": 30001,
+      "continent": "Europe",
+      "state": "NL"
+    },
+    {
+      "addr": "pool.adaholycs.de",
+      "port": 46343,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "tr1.adapool.cloud",
+      "port": 3002,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "3.14.16.248",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Ohio"
+    },
+    {
+      "addr": "tstnt.tracetake.com",
+      "port": 3005,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "24.37.174.13",
+      "port": 3005,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "139.218.11.14",
+      "port": 6005,
+      "continent": "Oceania",
+      "state": "AU"
+    },
+    {
+      "addr": "relay1.testnet.adacore.io",
+      "port": 6000,
+      "continent": "Oceania",
+      "state": "AU"
+    },
+    {
+      "addr": "testnet-relay.ada4profit.com",
+      "port": 4421,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "185.173.235.164",
+      "port": 5001,
+      "continent": "Europe",
+      "state": "NL"
+    },
+    {
+      "addr": "14.201.4.90",
+      "port": 6006,
+      "continent": "Oceania",
+      "state": "AU"
+    },
+    {
+      "addr": "167.71.142.78",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "161.97.170.151",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "18.197.137.80",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "63.250.55.73",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Texas"
+    },
+    {
+      "addr": "goingto.work",
+      "port": 4444,
+      "continent": "North America",
+      "state": "New York"
+    },
+    {
+      "addr": "3.136.228.55",
+      "port": 6000,
+      "continent": "North America",
+      "state": "Ohio"
+    },
+    {
+      "addr": "185.161.193.105",
+      "port": 6021,
+      "continent": "Europe",
+      "state": "IT"
+    },
+    {
+      "addr": "pmn-relay.bena.rocks",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "CZ"
+    },
+    {
+      "addr": "46.101.217.248",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "207.180.225.197",
+      "port": 3003,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "34.83.141.237",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Oregon"
+    },
+    {
+      "addr": "bskilled.dynip.sapo.pt",
+      "port": 3000,
+      "continent": "Europe",
+      "state": "PT"
+    },
+    {
+      "addr": "108.232.191.201",
+      "port": 6101,
+      "continent": "North America",
+      "state": "Georgia"
+    },
+    {
+      "addr": "34.116.112.143",
+      "port": 6000,
+      "continent": "Oceania",
+      "state": "AU"
+    },
+    {
+      "addr": "3.21.195.73",
+      "port": 6001,
+      "continent": "North America",
+      "state": "Ohio"
+    },
+    {
+      "addr": "cardano-test2.nextvm.net",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "RO"
+    },
+    {
+      "addr": "23.94.134.119",
+      "port": 5001,
+      "continent": "Europe",
+      "state": "NL"
+    },
+    {
+      "addr": "testrelay1.gotostaking.com",
+      "port": 4444,
+      "continent": "North America",
+      "state": "New York"
+    },
+    {
+      "addr": "159.203.58.57",
+      "port": 3000,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "185.39.42.151",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "ES"
+    },
+    {
+      "addr": "50.70.60.233",
+      "port": 3001,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "13.51.92.213",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "SE"
+    },
+    {
+      "addr": "178.62.27.17",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "116.203.67.221",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "100.42.240.61",
+      "port": 6000,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "34.90.231.181",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "NL"
+    },
+    {
+      "addr": "24.28.79.224",
+      "port": 51672,
+      "continent": "North America",
+      "state": "Texas"
+    },
+    {
+      "addr": "adapool.ddns.net",
+      "port": 51672,
+      "continent": "North America",
+      "state": "Texas"
+    },
+    {
+      "addr": "3.15.206.233",
+      "port": 6000,
+      "continent": "North America",
+      "state": "Ohio"
+    },
+    {
+      "addr": "198.144.143.242",
+      "port": 3001,
+      "continent": "Asia",
+      "state": "JP"
+    },
+    {
+      "addr": "69.164.216.173",
+      "port": 6000,
+      "continent": "North America",
+      "state": "New Jersey"
+    },
+    {
+      "addr": "66.175.213.99",
+      "port": 6000,
+      "continent": "North America",
+      "state": "New Jersey"
+    },
+    {
+      "addr": "104.248.134.85",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "116.14.113.210",
+      "port": 6000,
+      "continent": "Asia",
+      "state": "SG"
+    },
+    {
+      "addr": "185.204.197.176",
+      "port": 3000,
+      "continent": "Asia",
+      "state": "IR"
+    },
+    {
+      "addr": "159.69.35.233",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "zstarrelay.sjurado.eu",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "cardano-test.bitnode.eu",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "can1.ddnsgeek.com",
+      "port": 3002,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "cardano-t02.bitnode.eu",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "relay1.greenstaking.com",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "51.195.149.77",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "cardano-test01.netspectrum.com",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Oregon"
+    },
+    {
+      "addr": "relay.test.lidonation.com",
+      "port": 3010,
+      "continent": "North America",
+      "state": "Iowa"
+    },
+    {
+      "addr": "stash-testnet.cardanostash.io",
+      "port": 3001,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "185.67.208.38",
+      "port": 6002,
+      "continent": "Europe",
+      "state": "ES"
+    },
+    {
+      "addr": "54.218.33.196",
+      "port": 6000,
+      "continent": "North America",
+      "state": "Oregon"
+    },
+    {
+      "addr": "79.168.51.208",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "PT"
+    },
+    {
+      "addr": "hermes.blockchainlens.org",
+      "port": 6000,
+      "continent": "Asia",
+      "state": "SG"
+    },
+    {
+      "addr": "185.164.6.221",
+      "port": 54329,
+      "continent": "Europe",
+      "state": "AT"
+    },
+    {
+      "addr": "pooltugal-pi.ddns.net",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "PT"
+    },
+    {
+      "addr": "ec2-44-241-94-172.us-west-2.compute.amazonaws.com",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Oregon"
+    },
+    {
+      "addr": "relay1-test.ahlnet.nu",
+      "port": 2102,
+      "continent": "Europe",
+      "state": "SE"
+    },
+    {
+      "addr": "51.15.98.175",
+      "port": 3000,
+      "continent": "Europe",
+      "state": "NL"
+    },
+    {
+      "addr": "161.97.184.125",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "159.203.50.8",
+      "port": 3001,
+      "continent": "North America",
+      "state": "CA"
+    },
+    {
+      "addr": "adapool.chaintrust.com",
+      "port": 3001,
+      "continent": "Asia",
+      "state": "SA"
+    },
+    {
+      "addr": "143.198.74.7",
+      "port": 6000,
+      "continent": "North America",
+      "state": "New Jersey"
+    },
+    {
+      "addr": "35.161.96.191",
+      "port": 6000,
+      "continent": "North America",
+      "state": "Oregon"
+    },
+    {
+      "addr": "burns.bardels.me",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "DE"
+    },
+    {
+      "addr": "206.189.147.240",
+      "port": 6000,
+      "continent": "Asia",
+      "state": "SG"
+    },
+    {
+      "addr": "rocinante-relay01.adakailabs.com",
+      "port": 3001,
+      "continent": "North America",
+      "state": "New Jersey"
+    },
+    {
+      "addr": "rocinante-relay00.adakailabs.com",
+      "port": 3000,
+      "continent": "North America",
+      "state": "New Jersey"
+    },
+    {
+      "addr": "34.68.36.180",
+      "port": 3001,
+      "continent": "North America",
+      "state": "Iowa"
+    },
+    {
+      "addr": "81.187.227.108",
+      "port": 3001,
+      "continent": "Europe",
+      "state": "GB"
+    },
+    {
+      "addr": "9656b35a.cardano-relay.bison.run",
+      "port": 1338,
+      "continent": "North America",
+      "state": "Ohio"
+    },
+    {
+      "addr": "51.75.79.182",
+      "port": 6000,
+      "continent": "Europe",
+      "state": "DE"
+    }
+  ]
+}
