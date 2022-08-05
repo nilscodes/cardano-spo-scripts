@@ -149,6 +149,9 @@ First, on the live block producer node run
 Then copy the KES files over to your offline machine and as instructed, run
 `./offline-regenerate-nodecert-for-kes-key KES_PERIOD`
 
+Verify counter # is correct as described here:
+https://ecp.gitbook.io/how-to-guides-for-coincashew-method-cardano-spos/maintenance-and-daily-operations/maintenance-and-daily-operations/adjust-node.counter-for-kes
+
 Copy the new node-op.cert file from the certs subfolder back onto your core node and run
 `sudo systemctl restart cardano-node` or (if security updates are required) `sudo reboot`
 
@@ -188,3 +191,37 @@ Update the binaries and back up the old ones
 
 Start the service again
 `sudo systemctl start cardano-node`
+
+
+## How to create a cardano-db-sync out of nowhere
+Install Ubuntu 20.04
+Deploy these scripts into a script folder and make them executable
+Create a cardano user and make him sudo via
+`./make-cardano-sudo-user.sh`
+
+Log in as the cardano user
+
+Install docker-compose
+`sudo apt install apt-transport-https ca-certificates curl software-properties-common`
+`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`
+`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"`
+`sudo apt-get install docker-ce docker-compose`
+`sudo systemctl enable docker`
+`sudo systemctl start docker`
+`sudo usermod -aG docker cardano`
+`sudo reboot`
+
+Log in as the cardano user again
+Execute
+`git clone https://github.com/input-output-hk/cardano-db-sync.git`
+`cd cardano-db-sync`
+`git checkout tags/12.0.2`
+
+Resolve this if it still applies for your version:
+https://github.com/input-output-hk/cardano-db-sync/issues/784
+
+Run this with the correct snapshot from https://update-cardano-mainnet.iohk.io/cardano-db-sync/index.html matching your cardano-db-sync version
+`RESTORE_SNAPSHOT=https://update-cardano-mainnet.iohk.io/cardano-db-sync/12/db-sync-snapshot-schema-12-block-7313329-x86_64.tgz NETWORK=mainnet docker-compose up -d`
+
+Then to see the progress, run 
+`docker-compose logs -f`

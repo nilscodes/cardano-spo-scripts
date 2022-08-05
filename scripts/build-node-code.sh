@@ -2,7 +2,7 @@
 
 if [ "$#" -ne 3 ]; then
     echo "Usage: build-node-code.sh CABAL_VERSION GHC_VERSION CARDANO_NODE_VERSION"
-    echo "Latest current versions are 3.4.0.0 for CABAL_VERSION, 8.10.2 for GHC_VERSION and 1.26.1 for CARDANO_NODE_VERSION"
+    echo "Latest current compatible versions are 3.4.0.0 for CABAL_VERSION, 8.10.7 for GHC_VERSION and 1.33.0 for CARDANO_NODE_VERSION"
     exit 2
 fi
 
