@@ -37,7 +37,7 @@ Steps:
 ## Step 3: Build the cardano-cli and cardano
 `./build-node-code.sh CABAL_VERSION GHC_VERSION CARDANO_NODE_VERSION`
 
-Latest current versions are 3.4.0.0 for CABAL_VERSION, 8.10.4 for GHC_VERSION and 1.29.0 for CARDANO_NODE_VERSION
+Latest current versions are 3.6.2.0 for CABAL_VERSION, 8.10.7 for GHC_VERSION and 1.35.3 for CARDANO_NODE_VERSION
 
 ## Step 4 
 `./set-net.sh mainnet|testnet [TESTNET_MAGIC_ID]`
