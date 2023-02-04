@@ -187,14 +187,14 @@ Stop the service
 `sudo systemctl stop cardano-node`
 
 Update the binaries and back up the old ones
-`./update-node-binaries.sh GHC_VERSION CARDANO_NODE_VERSION`
+`./update-node-binary.sh GHC_VERSION CARDANO_NODE_VERSION`
 
 Start the service again
 `sudo systemctl start cardano-node`
 
 
 ## How to create a cardano-db-sync out of nowhere
-Install Ubuntu 20.04
+Install Ubuntu 22.04
 Deploy these scripts into a script folder and make them executable
 Create a cardano user and make him sudo via
 `./make-cardano-sudo-user.sh`
@@ -215,13 +215,16 @@ Log in as the cardano user again
 Execute
 `git clone https://github.com/input-output-hk/cardano-db-sync.git`
 `cd cardano-db-sync`
-`git checkout tags/12.0.2`
+`git checkout tags/13.0.5`
 
-Resolve this if it still applies for your version:
-https://github.com/input-output-hk/cardano-db-sync/issues/784
+Edit the docker-compose.yml file and comment out the db-sync and postgres services and corresponding volumes and run `docker-compose up -d`
+Run `docker-compose stop` after 30 seconds
+Copy the backed up db directory of a fully synched node into the cardano-node-db volume location and set file permissions to match the existing file permissions. Make sure to delete the existing ledger files.
+Run `docker-compose start` and wait until the the cardano-node is fully synched
+Uncomment the previously commented out services in the docker-compose.yml file
 
 Run this with the correct snapshot from https://update-cardano-mainnet.iohk.io/cardano-db-sync/index.html matching your cardano-db-sync version
-`RESTORE_SNAPSHOT=https://update-cardano-mainnet.iohk.io/cardano-db-sync/12/db-sync-snapshot-schema-12-block-7313329-x86_64.tgz NETWORK=mainnet docker-compose up -d`
+`RESTORE_SNAPSHOT=https://update-cardano-mainnet.iohk.io/cardano-db-sync/13/db-sync-snapshot-schema-13-block-7770734-x86_64.tgz NETWORK=mainnet docker-compose up -d`
 
 Then to see the progress, run 
 `docker-compose logs -f`

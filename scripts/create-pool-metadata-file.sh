@@ -14,7 +14,7 @@ STAKE_POOL_HOMEPAGE=$4
 STAKE_POOL_EXTENDED_METADATA_URL=$5
 
 # Create metadata file
-echo "{\"name\":\"$STAKE_POOL_NAME\",\"description\":\"$STAKE_POOL_DESCRIPTION\",\"ticker\":\"$STAKE_POOL_TICKER\",\"homepage\":\"$STAKE_POOL_HOMEPAGE\"}" | jq '.' > metadata/stake-pool-metadata.json
+echo "{\"name\":\"$STAKE_POOL_NAME\",\"description\":\"$STAKE_POOL_DESCRIPTION\",\"ticker\":\"$STAKE_POOL_TICKER\",\"homepage\":\"$STAKE_POOL_HOMEPAGE\",\"extended\":\"$STAKE_POOL_EXTENDED_METADATA_URL\"}" | jq '.' > metadata/stake-pool-metadata.json
 cat metadata/stake-pool-metadata.json
 
 # Hash Metadata file
