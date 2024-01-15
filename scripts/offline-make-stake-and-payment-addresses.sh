@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 2 ]; then
-    echo "Usage: build-move-transaction.sh STAKEADDRESS STAKEPAYMENTADDRESS"
+    echo "Usage: offline-make-stake-and-payment-addresses.sh STAKEADDRESS STAKEPAYMENTADDRESS"
     exit 2
 fi
 

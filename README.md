@@ -213,9 +213,9 @@ Install docker-compose
 
 Log in as the cardano user again
 Execute
-`git clone https://github.com/input-output-hk/cardano-db-sync.git`
+`git clone https://github.com/IntersectMBO/cardano-db-sync.git`
 `cd cardano-db-sync`
-`git checkout tags/13.0.5`
+`git checkout tags/13.1.1.3`
 
 Edit the docker-compose.yml file and comment out the db-sync and postgres services and corresponding volumes and run `docker-compose up -d`
 Run `docker-compose stop` after 30 seconds
@@ -228,3 +228,25 @@ Run this with the correct snapshot from https://update-cardano-mainnet.iohk.io/c
 
 Then to see the progress, run 
 `docker-compose logs -f`
+
+## Mithril Bootstrap
+
+### Preprod
+
+Add to .bashrc
+
+export MITHRIL_IMAGE_ID_PREPROD=main-25bb9a6
+export AGGREGATOR_ENDPOINT_PREPROD=https://aggregator.release-preprod.api.mithril.network/aggregator
+export GENESIS_VERIFICATION_KEY_PREPROD=5b3132372c37332c3132342c3136312c362c3133372c3133312c3231332c3230372c3131372c3139382c38352c3137362c3139392c3136322c3234312c36382c3132332c3131392c3134352c31332c3233322c3234332c34392c3232392c322c3234392c3230352c3230352c33392c3233352c34345d
+
+mithril_client_preprod () {
+  docker run --rm -e NETWORK=preprod -e GENESIS_VERIFICATION_KEY=$GENESIS_VERIFICATION_KEY_PREPROD -e AGGREGATOR_ENDPOINT=$AGGREGATOR_ENDPOINT_PREPROD --name='mithril-client' -v $(pwd):/app/data -u $(id -u) ghcr.io/input-output-hk/mithril-client:$MITHRIL_IMAGE_ID_PREPROD $@
+}
+
+Run source .bashrc
+
+Run `mithril_client_preprod snapshot list``
+Find latest snapshot
+Run `mithril_client_preprod snapshot download $DIGEST_ID`
+Copy db folder into docker-compose db mounted folder for node you are planning to run
+start node
