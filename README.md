@@ -19,20 +19,22 @@ Steps:
 ./harden-node.sh
 
 ## Step 1: Harden your core server
-[See also: Harden Ubuntu](https://www.lifewire.com/harden-ubuntu-server-security-4178243)
+[See also: Harden Ubuntu](https://web.archive.org/web/20220407101050/https://www.lifewire.com/harden-ubuntu-server-security-4178243)
 [See also: Secure Ubuntu](https://gist.github.com/lokhman/cc716d2e2d373dd696b2d9264c0287a3)
 - SSL only via keys, not password
 - Change SSL default port from 22
 - Allow SSL only from your relay node(s)
 - Close all unneeded ports except SSL and the core node port 3001
+- Ensure chrony/NTPdate is active
 
 ## Step 2: Harden your relay server
-[See also: Harden Ubuntu](https://www.lifewire.com/harden-ubuntu-server-security-4178243)
+[See also: Harden Ubuntu](https://web.archive.org/web/20220407101050/https://www.lifewire.com/harden-ubuntu-server-security-4178243)
 [See also: Secure Ubuntu](https://gist.github.com/lokhman/cc716d2e2d373dd696b2d9264c0287a3)
 - SSL only via keys, not password
 - Change SSL default port from 22
 - Allow SSL only from where absolutely needed
 - Close all unneeded ports except SSL and the relay node port 3000
+- Ensure chrony/NTPdate is active
 
 ## Step 3: Build the cardano-cli and cardano
 `./build-node-code.sh CABAL_VERSION GHC_VERSION CARDANO_NODE_VERSION`
@@ -71,6 +73,7 @@ current log files with
 
 ## Step 5.5: Set up payment address and keys
 - Create a payfrom.addr file containing the address you will pay from (WARNING: All funds in that address will be transferred and it can only have one transaction in it!)
+
 `./make-keys-and-address.sh payfrom`
 
 Copy addr/payfrom.addr to your online node
@@ -80,9 +83,13 @@ Copy addr/payfrom.addr to your online node
 
 ## Step 6: Register the stake address with the cardano net (online machine)
 `./register-stake-address.sh TTL payfrom stake-payment stake`
+
 Sign the transaction on the offline machine
+
 `./offline-register-stake-address-sign.sh `
+
 Copy the transaction back to your core node and submit it
+
 `./submit-transaction.sh`
 
 ## Step 7: Verify stake funding is present
@@ -144,15 +151,18 @@ Transfer it using your wallet of choice to the address in addr/payfrom.addr
 
 ## Rotate KES keys
 First, on the live block producer node run
+
 `./prepare-new-kes-key-files.sh`
 
 Then copy the KES files over to your offline machine and as instructed, run
+
 `./offline-regenerate-nodecert-for-kes-key KES_PERIOD`
 
 Verify counter # is correct as described here:
 https://ecp.gitbook.io/how-to-guides-for-coincashew-method-cardano-spos/maintenance-and-daily-operations/maintenance-and-daily-operations/adjust-node.counter-for-kes
 
 Copy the new node-op.cert file from the certs subfolder back onto your core node and run
+
 `sudo systemctl restart cardano-node` or (if security updates are required) `sudo reboot`
 
 Use the opportunity to reboot the relay(s) as well
@@ -162,18 +172,22 @@ Use the opportunity to reboot the relay(s) as well
 ## Update Pledge or metadata etc for your pool without paying the deposit again
 On offline machine, make certs/pool-*.cert writable again
 Run
+
 `./offline-generate-stake-pool-registration-certificate METDATAURL`
 
 Copy the two certs/pool-*.cert files to your core node
 Run
+
 `./build-update-stake-pool-registration-transaction.sh TTL`
 
 Copy txtmp/tx.raw to your offline machine
 Run
+
 `./offline-build-stake-pool-registration-transaction.sh`
 
 Copy txtmp/tx.signed back to your core nore
 Run
+
 `./submit-transaction.sh`
 
 ---------------------------------------------------------------
@@ -181,15 +195,19 @@ Run
 ## Update node version/binary
 
 Build the cardano-cli and cardano with the new version
+
 `./update-node-code.sh GHC_VERSION CARDANO_NODE_VERSION`
 
 Stop the service
+
 `sudo systemctl stop cardano-node`
 
 Update the binaries and back up the old ones
+
 `./update-node-binary.sh GHC_VERSION CARDANO_NODE_VERSION`
 
 Start the service again
+
 `sudo systemctl start cardano-node`
 
 
@@ -197,24 +215,36 @@ Start the service again
 Install Ubuntu 22.04
 Deploy these scripts into a script folder and make them executable
 Create a cardano user and make him sudo via
+
 `./make-cardano-sudo-user.sh`
 
 Log in as the cardano user
 
 Install docker-compose
+
 `sudo apt install apt-transport-https ca-certificates curl software-properties-common`
+
 `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`
-`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"`
+
+`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable"`
+
 `sudo apt-get install docker-ce docker-compose`
+
 `sudo systemctl enable docker`
+
 `sudo systemctl start docker`
+
 `sudo usermod -aG docker cardano`
+
 `sudo reboot`
 
 Log in as the cardano user again
 Execute
+
 `git clone https://github.com/IntersectMBO/cardano-db-sync.git`
+
 `cd cardano-db-sync`
+
 `git checkout tags/13.1.1.3`
 
 Edit the docker-compose.yml file and comment out the db-sync and postgres services and corresponding volumes and run `docker-compose up -d`
@@ -224,9 +254,11 @@ Run `docker-compose start` and wait until the the cardano-node is fully synched
 Uncomment the previously commented out services in the docker-compose.yml file
 
 Run this with the correct snapshot from https://update-cardano-mainnet.iohk.io/cardano-db-sync/index.html matching your cardano-db-sync version
+
 `RESTORE_SNAPSHOT=https://update-cardano-mainnet.iohk.io/cardano-db-sync/13/db-sync-snapshot-schema-13-block-7770734-x86_64.tgz NETWORK=mainnet docker-compose up -d`
 
 Then to see the progress, run 
+
 `docker-compose logs -f`
 
 ## Mithril Bootstrap

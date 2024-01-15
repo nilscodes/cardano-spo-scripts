@@ -64,7 +64,7 @@ mkdir -p $HOME/src
 cd $HOME/src
 git clone https://github.com/input-output-hk/libsodium
 cd $HOME/src/libsodium
-git checkout 66f017f1
+git checkout dbb48cce5429cb6585c9034f002568964f1ce567
 $HOME/src/libsodium/autogen.sh
 $HOME/src/libsodium/configure
 make
