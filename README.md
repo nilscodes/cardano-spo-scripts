@@ -134,6 +134,33 @@ Transfer it using your wallet of choice to the address in addr/payfrom.addr
 
 ---------------------------------------------------------------
 
+# Register pledge wallet to vote in Catalyst
+
+Ensure `bech32`, `catalyst-toolbox` and `cardano-signer` are in a subfolder called `catalyst` and executable on both your relay and offline machine (see also: https://forum.cardano.org/t/registering-several-wallets-accounts-to-the-same-catalyst-voting-key/120829)
+
+From the main scripts folder on your offline machine, run this and replace the pin with your desired voting pin, stake address name and stake payment address name
+
+`catalyst-offline-register-pledge-for-vote.sh PIN STAKEADDRESS STAKEPAYMENTADDRESS`
+
+After running this, retrieve the png file from the catalyst subfolder and store it in a safe place (this QR code image combined with your PIN lets you vote in Catalyst).
+Copy the catalyst/*.cbor file to your relay (also into the catalyst subfolder). Now run
+
+`query.sh STAKEPAYMENTADDRESS`
+
+Find a usable UTXO and index, then run the below and replace UTXO_IN with the UTXO from above in the format txHash#txIndex
+
+`catalyst-build-register-transaction.sh STAKEPAYMENTADDRESS UTXO_IN`
+
+Now you have a raw transaction to witness and sign on your offline machine. Copy `txtmp/tx.raw` to your offline machine and run to sign the transaction with the key that pays for the fees
+
+`catalyst-offline-sign-register-transaction STAKEPAYMENTADDRESS`
+
+Copy the resulting `txtmp/tx.signed` to your relay and run
+
+`submit-transaction.sh`
+
+---------------------------------------------------------------
+
 ## Create rewards transfer transaction by running this command
 `./transfer-rewards-create-transaction.sh TTL TARGETADDRESS`
 
