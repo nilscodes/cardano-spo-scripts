@@ -21,7 +21,7 @@ echo "  flags: -external-libsodium-vrf" >>  cabal.project.local
 
 $HOME/.local/bin/cabal clean
 $HOME/.local/bin/cabal update
-$HOME/.local/bin/cabal build all
+$HOME/.local/bin/cabal build cardano-node cardano-cli
 
 mkdir -p $HOME/binary-backup
 cp $HOME/.local/bin/cardano-* $HOME/binary-backup

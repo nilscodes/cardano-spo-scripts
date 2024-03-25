@@ -104,11 +104,12 @@ echo "  flags: -external-libsodium-vrf" >>  cabal.project.local
 
 $HOME/.local/bin/cabal clean
 $HOME/.local/bin/cabal update
-$HOME/.local/bin/cabal build all
+$HOME/.local/bin/cabal build cardano-node cardano-cli
 
-cp -p dist-newstyle/build/x86_64-linux/ghc-$GHC_VERSION_TO_INSTALL/cardano-node-$CARDANO_NODE_VERSION_TO_INSTALL/x/cardano-node/noopt/build/cardano-node/cardano-node $HOME/.local/bin/
-cp -p dist-newstyle/build/x86_64-linux/ghc-$GHC_VERSION_TO_INSTALL/cardano-cli-$CARDANO_NODE_VERSION_TO_INSTALL/x/cardano-cli/noopt/build/cardano-cli/cardano-cli $HOME/.local/bin/
+cp -p $(find dist-newstyle/ -name "cardano-node" -type f | head -n 1) $HOME/.local/bin/
+cp -p $(find dist-newstyle/ -name "cardano-cli" -type f | head -n 1) $HOME/.local/bin/
 cd $HOME
 
-CARDANO_VERSION_INSTALLED=$(cardano-cli --version)
-echo - Successfully installed cardano-node $CARDANO_VERSION_INSTALLED
+CARDANO_NODE_VERSION_INSTALLED=$(cardano-node --version)
+CARDANO_CLI_VERSION_INSTALLED=$(cardano-cli --version)
+echo - Successfully installed cardano-node $CARDANO_NODE_VERSION_INSTALLED and cardano-cli $CARDANO_CLI_VERSION_INSTALLED
