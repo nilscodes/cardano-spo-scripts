@@ -1,0 +1,51 @@
+logging {
+  level = "warn"
+}
+
+prometheus.exporter.unix "default" {
+  include_exporter_metrics = true
+  disable_collectors       = ["mdadm"]
+}
+
+prometheus.scrape "default" {
+  targets = array.concat(
+    prometheus.exporter.unix.default.targets,
+    [
+      {
+        "__address__" = "127.0.0.1:12798",
+        "__metrics_path__" = "/relay-fi",
+        "__scheme__" = "http",
+      },
+    ],
+  )
+
+  forward_to = [prometheus.relabel.add_static.receiver]
+}
+
+prometheus.relabel "add_static" {
+  rule {
+    action       = "replace"
+    target_label = "server"
+    replacement  = "relay-fi"
+  }
+
+  rule {
+    action       = "replace"
+    target_label = "env"
+    replacement  = "prod"
+  }
+
+  forward_to = [prometheus.remote_write.gc.receiver]
+}
+
+prometheus.remote_write "gc" {
+  endpoint {
+    url = "${GRAFANA_PROM_URL}"
+    basic_auth {
+      username = "${GRAFANA_PROM_USER}"
+      password = "${GRAFANA_PROM_PASSWORD}"
+    }
+  }
+}
+
+

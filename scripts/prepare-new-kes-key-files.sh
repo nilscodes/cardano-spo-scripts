@@ -1,12 +1,11 @@
 #!/bin/bash
 
 NETIDENTIFIER=$(cat $HOME/cardano-node-conf/cardano-cli-net-param)
-NETNAME=$(cat $HOME/cardano-node-conf/netname)
 KES_KEY_NAME=kes
 
 # Get the starting KES period
 slotNo=$(cardano-cli query tip $NETIDENTIFIER | jq -r '.slot')
-slotsPerKESPeriod=$(jq .slotsPerKESPeriod $HOME/cardano-node-conf/$NETNAME-shelley-genesis.json)
+slotsPerKESPeriod=$(jq .slotsPerKESPeriod $HOME/cardano-node-conf/shelley-genesis.json)
 kesPeriod=$((${slotNo} / ${slotsPerKESPeriod}))
 startKesPeriod=${kesPeriod}
 echo Write down the startKesPeriod for use on your air-gapped offline node: ${startKesPeriod}

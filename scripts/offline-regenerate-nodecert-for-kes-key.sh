@@ -11,7 +11,6 @@ VRF_KEY_NAME=vrf
 KES_KEY_NAME=kes
 NODE_CERTIFICATE_NAME=node-op
 NETIDENTIFIER=$(cat $HOME/cardano-node-conf/cardano-cli-net-param)
-NETNAME=$(cat $HOME/cardano-node-conf/netname)
 
 # Back up old node-op.cert
 curDate=$(date +%Y-%m-%d_%H%M%S)

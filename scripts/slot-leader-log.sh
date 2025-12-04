@@ -1,33 +1,39 @@
-#!/bin/bash
-/usr/local/bin/cncli sync --host 138.201.29.59 --port 33000 --no-service
+#!/usr/bin/env bash
+set -euo pipefail
 
-MYPOOLID=$(cat metdata/stakepoolid.txt)
-echo "LeaderLog - POOLID $MYPOOLID"
+usage() { echo "Usage: $(basename "$0") [next|current]"; }
 
-SNAPSHOT=$(/home/cardano/.local/bin/cardano-cli query stake-snapshot --stake-pool-id $MYPOOLID --mainnet)
+if [ "$#" -gt 1 ]; then
+  usage
+  exit 2
+fi
 
-# Next Epoch
-# POOL_STAKE=$(jq .poolStakeMark <<< $SNAPSHOT)
-# ACTIVE_STAKE=$(jq .activeStakeMark <<< $SNAPSHOT)
-# EPOCHTYPE=next
+choice="${1:-next}"
 
-# Current Epoch
-# POOL_STAKE=$(jq .poolStakeSet <<< $SNAPSHOT)
-# ACTIVE_STAKE=$(jq .activeStakeSet <<< $SNAPSHOT)
-# EPOCHTYPE=current
+case "$choice" in
+  next|current)
+    epoch_arg=(--"$choice")
+    ;;
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Error: invalid argument '$choice'. Allowed: next | current"
+    usage
+    exit 2
+    ;;
+esac
 
-# Last Epoch
-POOL_STAKE=$(jq .poolStakeGo <<< $SNAPSHOT)
-ACTIVE_STAKE=$(jq .activeStakeGo <<< $SNAPSHOT)
-EPOCHTYPE=prev
+cardano-cli query leadership-schedule \
+  --vrf-signing-key-file pool-keys/vrf.skey \
+  "${epoch_arg[@]}" \
+  --out-file ./slots.json \
+  --genesis ../cardano-node-conf/shelley-genesis.json \
+  --mainnet \
+  --stake-pool-id "$(cat metadata/stakepoolid.txt)"
 
-echo "/usr/local/bin/cncli leaderlog --pool-id $MYPOOLID --pool-vrf-skey pool-keys/vrf.skey --byron-genesis /home/cardano/cardano-node-conf/mainnet-byron-genesis.json --shelley-genesis /home/cardano/cardano-node-conf/mainnet-shelley-genesis.json --pool-stake $POOL_STAKE --active-stake $ACTIVE_STAKE --ledger-set $EPOCHTYPE"
-MYPOOL=`/usr/local/bin/cncli leaderlog --pool-id $MYPOOLID --pool-vrf-skey pool-keys/vrf.skey --byron-genesis /home/cardano/cardano-node-conf/mainnet-byron-genesis.json --shelley-genesis /home/cardano/cardano-node-conf/mainnet-shelley-genesis.json --pool-stake $POOL_STAKE --active-stake $ACTIVE_STAKE --ledger-set $EPOCHTYPE`
-
-EPOCH=`jq .epoch <<< $MYPOOL`
-echo "\`Epoch $EPOCH\` 🧙🔮:"
-
-SLOTS=`jq .epochSlots <<< $MYPOOL`
-IDEAL=`jq .epochSlotsIdeal <<< $MYPOOL`
-PERFORMANCE=`jq .maxPerformance <<< $MYPOOL`
-echo "\`MYPOOL - $SLOTS \`🎰\`,  $PERFORMANCE% \`🍀max, \`$IDEAL\` 🧱ideal"
+jq '.[].slotTime
+    | strptime("%Y-%m-%dT%H:%M:%SZ")
+    | mktime - 7 * 3600
+    | strftime("%Y-%m-%d %H:%M:%S")' ./slots.json

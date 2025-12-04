@@ -1,0 +1,21 @@
+# The Cardano tracer service (part of systemd)
+# file: /etc/systemd/system/cardano-tracer.service
+
+[Unit]
+Description     = Cardano tracer service
+Wants           = network-online.target
+After           = network-online.target
+
+[Service]
+User            = cardano
+Type            = simple
+WorkingDirectory= $HOME/node
+ExecStart       = $HOME/.local/bin/cardano-tracer --config $HOME/cardano-node-conf/cardano-tracer.json
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+TimeoutStopSec=2
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy= multi-user.target

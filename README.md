@@ -13,7 +13,11 @@ Core Node Port: 3001
 Steps:
 
 ## User Steps
+Run
+```
 ./make-cardano-sudo-user.sh
+```
+Now log in as Cardano User
 
 ## Basic Harden Steps
 ./harden-node.sh
@@ -21,31 +25,31 @@ Steps:
 ## Step 1: Harden your core server
 [See also: Harden Ubuntu](https://web.archive.org/web/20220407101050/https://www.lifewire.com/harden-ubuntu-server-security-4178243)
 [See also: Secure Ubuntu](https://gist.github.com/lokhman/cc716d2e2d373dd696b2d9264c0287a3)
-- SSL only via keys, not password
-- Change SSL default port from 22
-- Allow SSL only from your relay node(s)
-- Close all unneeded ports except SSL and the core node port 3001
+- SSH only via keys, not password
+- Change SSH default port from 22
+- Allow SSH only from your relay node(s)
+- Close all unneeded ports except SSH and the core node port 3001
 - Ensure chrony/NTPdate is active
 
 ## Step 2: Harden your relay server
 [See also: Harden Ubuntu](https://web.archive.org/web/20220407101050/https://www.lifewire.com/harden-ubuntu-server-security-4178243)
 [See also: Secure Ubuntu](https://gist.github.com/lokhman/cc716d2e2d373dd696b2d9264c0287a3)
-- SSL only via keys, not password
-- Change SSL default port from 22
-- Allow SSL only from where absolutely needed
-- Close all unneeded ports except SSL and the relay node port 3000
+- SSH only via keys, not password
+- Change SSH default port from 22
+- Allow SSH only from where absolutely needed
+- Close all unneeded ports except SSH and the relay node port 3000
 - Ensure chrony/NTPdate is active
 
 ## Step 3: Build the cardano-cli and cardano
 `./build-node-code.sh CABAL_VERSION GHC_VERSION CARDANO_NODE_VERSION`
 
-Latest current versions are 3.6.2.0 for CABAL_VERSION, 8.10.7 for GHC_VERSION and 1.35.3 for CARDANO_NODE_VERSION
+Latest current versions are 3.12.1.0 for CABAL_VERSION, 9.6.7 for GHC_VERSION and 10.5.1 for CARDANO_NODE_VERSION
 
 ## Step 4 
-`./set-net.sh mainnet|testnet [TESTNET_MAGIC_ID]`
+`./set-net.sh mainnet|preview|preprod`
 
 Set the net you want to run on (testnet or mainnet)
-Will also automatically download the respective configuration files, i.e. it will automatically run `./get-config.sh conf testnet|mainnet`
+Will also automatically download the respective configuration files, i.e. it will automatically run `./get-config.sh mainnet|preview|preprod`
 
 ## Step 4.5
 `./create-node-runner-binary.sh full|relay|core NETWORK_INTERFACE_NODE_IP NETWORK_INTERFACE_NODE_PORT`
@@ -57,6 +61,29 @@ Make sure to use the IP and port that your network interface has, which could be
 `./create-node-runner-service.sh full|relay|core`
 
 Create a systemd script for your node and install it. This will ensure your node will auto-restart if it crashes or if the server restarts. You can now run your node with
+
+## Step 4.7
+
+Adjust the `mithril-bootstrap.sh` file with the current mithril settings for your network type as needed
+
+Run `mithril-bootstrap.sh`
+
+Once the latest mithril snapshot is downloaded into the `db` directory of the current directory, move it to its final location via 
+
+`mv db /home/cardano/node`
+
+## Step 4.8
+
+Set up Cardano tracer which is built as part of the previous build steps, by running
+
+`./create-tracer-service.sh`
+
+This will create and start the service and copy the configuration file into its place. Edit the configuration file if need be under `/home/cardano/cardano-node-conf/cardano-tracer.json`
+Adjust the Network magic and other settings if need be. After making changes, be sure to restart via
+
+`sudo systemctl restart cardano-tracer`
+
+## Step 4.9
 
 `sudo systemctl start cardano-node`
 
@@ -134,6 +161,35 @@ Transfer it using your wallet of choice to the address in addr/payfrom.addr
 
 ---------------------------------------------------------------
 
+# Monitoring
+
+`cardano-tracer` is built as part of the build scripts and needs to be installed. However, the metrics are only collected locally and still need to be pushed out. We are using Grafana Alloy to do so.
+
+Follow the steps here to install alloy as a service:
+
+https://grafana.com/docs/alloy/latest/set-up/install/linux/
+
+Then ensure the service is enabled and started
+
+```
+sudo systemctl enable alloy
+sudo systemctl start alloy
+```
+
+After that, adjust your `config.alloy` file based on the template in this directory. Add the right labels you want to add and replace the variables that contain the Grafana Prometheus URL, user and password to push to.
+
+Adjust the prometheus subpath `relay-fi` according to the `TraceOptionNodeName` parameter in your node's `config.json`. If `TraceOptionNodeName` is not present in your config, the URL will be something dynamically generated and can be discovered by running `curl -v "http://localhost:12798"` to get the list of metrics links.
+
+Restart all services
+```
+sudo systemctl restart cardano-tracer
+sudo systemctl restart cardano-node
+sudo systemctl restart alloy
+```
+
+
+---------------------------------------------------------------
+
 # Register pledge wallet to vote in Catalyst
 
 Ensure `bech32`, `catalyst-toolbox` and `cardano-signer` are in a subfolder called `catalyst` and executable on both your relay and offline machine (see also: https://forum.cardano.org/t/registering-several-wallets-accounts-to-the-same-catalyst-voting-key/120829)
@@ -158,6 +214,60 @@ Now you have a raw transaction to witness and sign on your offline machine. Copy
 Copy the resulting `txtmp/tx.signed` to your relay and run
 
 `submit-transaction.sh`
+
+---------------------------------------------------------------
+
+# Vote on a governance action
+
+Copy the `governance/sample-vote-body-cip100.json` file to the `hazelpool-web` repository into the `vote/unsigned` folder and give a name matching the governance action. In our example we will save it as `test-vote-unsigned.json`
+
+Update the rationale in the file.
+
+Copy the file onto the cold node where `cardano-signer` is available (https://github.com/gitmachtl/scripts/tree/master/cardano)
+
+Run `cardano-signer sign --cip100 --secret-key cold.skey --author-name "Nils Codes" --data-file "test-vote-unsigned.json" --out-file "test-vote.json"`
+
+We use short names for the output files to keep the final URL below 64 characters so it fits easily into the metadata of the transaction.
+
+Copy the signed file `test-vote.json` back to a internet connected computer, place it in the `hazelpool-web` repository into the `vote` folder, commit and push to Git and publish to the website according to your current setup.
+
+Find the governance action ID (format is `hash#index`, for example `47a0e7a4f9383b1afc2192b23b41824d65ac978d7741aca61fc1fa16833d1111#0`) on https://gov.tools or https://tempo.vote
+
+Ensure the pool VKey (Verification Key) is present in the scripts directory with the file name `pool.node.vkey`
+
+On an online node with the scripts from above installed, run the following command, adjusting the governance ID and verified working rationale URL with the signed vote.
+
+`./24a_genVote.sh pool.node 47a0e7a4f9383b1afc2192b23b41824d65ac978d7741aca61fc1fa16833d1111#0 "url: https://info.hazelpool.com/vote/test-vote.json"`
+
+You will then be prompted a few things. Agree as appropriate. A file like `pool_250825075234.pool.vote` will be created containing the unsigned vote transaction
+
+Run 
+
+`./01_workOffline.sh new`
+
+to create a new offline workspace
+
+Ensure an appropriate payment address and vkey are available, that you have signing rights for. In our case, an address and vkey file are present in the directory as `pledge.payment.addr` and `pledge.payment.vkey`
+
+Run
+
+`./01_workOffline.sh add pledge.payment`
+
+To add its UTxOs to the offline workspace
+
+Copy both files (the vote and `offlineTransfer.json`) back to the cold node into the ATADA scripts directory with the scripts configured in offline mode and a working cardano-cli and cardano-node binary available.
+
+`./24b_regVote.sh pool.node pledge.payment pool_250825075234.pool.vote "msg: My votings as a DRep, woohoo!"`
+
+The `msg` parameter is optional for the transaction that registers the vote (not for the vote itself). `pool.node` points to the same type of files as above, but now including a signing key file `pool.node.skey`, same for `pledge.payment`.
+
+Copy the `offlineTransfer.json` file to the live node
+
+Run 
+
+`./01_workOffline.sh execute`
+
+This will prompt you to verify and submit the transaction. After submission, the vote will appear on chain.
 
 ---------------------------------------------------------------
 
@@ -272,21 +382,21 @@ Execute
 
 `cd cardano-db-sync`
 
-`git checkout tags/13.1.1.3`
+`git checkout tags/13.6.0.5`
 
-Edit the docker-compose.yml file and comment out the db-sync and postgres services and corresponding volumes and run `docker-compose up -d`
-Run `docker-compose stop` after 30 seconds
+Edit the docker-compose.yml file and comment out the db-sync and postgres services and corresponding volumes and run `docker compose up -d`
+Run `docker compose stop` after 30 seconds
 Copy the backed up db directory of a fully synched node into the cardano-node-db volume location and set file permissions to match the existing file permissions. Make sure to delete the existing ledger files.
-Run `docker-compose start` and wait until the the cardano-node is fully synched
+Run `docker compose start` and wait until the the cardano-node is fully synched
 Uncomment the previously commented out services in the docker-compose.yml file
 
 Run this with the correct snapshot from https://update-cardano-mainnet.iohk.io/cardano-db-sync/index.html matching your cardano-db-sync version
 
-`RESTORE_SNAPSHOT=https://update-cardano-mainnet.iohk.io/cardano-db-sync/13/db-sync-snapshot-schema-13-block-7770734-x86_64.tgz NETWORK=mainnet docker-compose up -d`
+`RESTORE_SNAPSHOT=https://update-cardano-mainnet.iohk.io/cardano-db-sync/13/db-sync-snapshot-schema-13-block-7770734-x86_64.tgz NETWORK=mainnet docker compose up -d`
 
 Then to see the progress, run 
 
-`docker-compose logs -f`
+`docker compose logs -f`
 
 ## Mithril Bootstrap
 

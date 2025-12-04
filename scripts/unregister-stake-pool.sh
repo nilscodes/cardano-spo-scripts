@@ -11,7 +11,6 @@ TTL=$1
 RETIRE_IN_EPOCHS=$2
 STAKE_PAYMENT=$3
 NETIDENTIFIER=$(cat $HOME/cardano-node-conf/cardano-cli-net-param)
-NETNAME=$(cat $HOME/cardano-node-conf/netname)
 
 currentTxData=$(cardano-cli query utxo --address $(cat addr/$STAKE_PAYMENT.addr) $NETIDENTIFIER | tail -1)
 txIn=$(echo $currentTxData | awk '{print $1"#"$2}')

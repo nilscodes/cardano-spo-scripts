@@ -15,13 +15,13 @@ cd $HOME/src/cardano-node
 git fetch --all --recurse-submodules --tags
 git checkout tags/$CARDANO_NODE_VERSION_TO_UPDATE_TO
 git reset --hard
-$HOME/.local/bin/cabal configure --with-compiler=ghc-$GHC_VERSION_TO_BUILD_WITH
+cabal configure --with-compiler=ghc-$GHC_VERSION_TO_BUILD_WITH
 echo "package cardano-crypto-praos" >>  cabal.project.local
 echo "  flags: -external-libsodium-vrf" >>  cabal.project.local
 
-$HOME/.local/bin/cabal clean
-$HOME/.local/bin/cabal update
-$HOME/.local/bin/cabal build cardano-node cardano-cli
+cabal clean
+cabal update
+cabal build cardano-node cardano-cli cardano-tracer
 
 mkdir -p $HOME/binary-backup
 cp $HOME/.local/bin/cardano-* $HOME/binary-backup

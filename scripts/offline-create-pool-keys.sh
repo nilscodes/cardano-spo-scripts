@@ -8,7 +8,6 @@ VRF_KEY_NAME=vrf
 KES_KEY_NAME=kes
 NODE_CERTIFICATE_NAME=node-op
 NETIDENTIFIER=$(cat $HOME/cardano-node-conf/cardano-cli-net-param)
-NETNAME=$(cat $HOME/cardano-node-conf/netname)
 
 # Create cold keys and cold counter
 cardano-cli node key-gen \
@@ -26,7 +25,7 @@ cardano-cli node key-gen-KES \
   --verification-key-file pool-keys/$KES_KEY_NAME.vkey \
   --signing-key-file pool-keys/$KES_KEY_NAME.skey
 
-slotsPerKESPeriod=$(jq .slotsPerKESPeriod $HOME/cardano-node-conf/$NETNAME-shelley-genesis.json)
+slotsPerKESPeriod=$(jq .slotsPerKESPeriod $HOME/cardano-node-conf/shelley-genesis.json)
 echo "Run the following script on the online node and enter the value here: ./get-current-slot.sh"
 read -p 'Current slot is: ' currentSlot
 kesPeriod=$(expr $currentSlot / $slotsPerKESPeriod)

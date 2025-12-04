@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 1 ]; then
-    echo "Usage: create-node-runner.sh full|relay|core"
+    echo "Usage: create-node-runner-service.sh full|relay|core"
     exit 2
 fi
 
